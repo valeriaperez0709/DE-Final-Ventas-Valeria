@@ -1,0 +1,33 @@
+# Evidencias — Examen final de Ingeniería de Datos
+
+## Escenario actualizado
+
+La fuente se preparó con una última carga de aproximadamente dos horas.
+
+- verificar_actualidad: success
+- construir_resumen: success
+
+El proceso permitió generar la tabla analítica de ventas diarias.
+
+## Escenario desactualizado
+
+La fuente se preparó con una última carga de aproximadamente treinta horas.
+
+- verificar_actualidad: failed
+- construir_resumen: upstream_failed
+
+La construcción quedó bloqueada debido al incumplimiento del umbral de actualidad de 24 horas.
+
+## Resumen de ventas
+
+| Fecha | Ventas | Unidades | Ingreso total |
+|---|---:|---:|---:|
+| 2026-01-10 | 2 | 3 | 46.00 |
+| 2026-01-11 | 3 | 6 | 51.25 |
+| 2026-01-12 | 1 | 4 | 12.40 |
+
+El resumen anterior se conserva cuando falla la validación de actualidad.
+
+## Conclusión
+
+El control de freshness impide reconstruir el resumen de ventas cuando la fuente supera la antigüedad máxima permitida. La dependencia configurada en Airflow garantiza que la construcción solamente se ejecute si la validación previa termina correctamente.
